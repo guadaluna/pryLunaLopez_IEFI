@@ -31,7 +31,7 @@ namespace pryLunaLopez_IEFI
                 conexionBD.usuario = txtUsuario.Text;
                 conexionBD.contrasena = txtContraseña.Text;
 
-                if (conexionBD.IniciarSesion())
+                //if (conexionBD.IniciarSesion())
                 {
                     frmPrincipal form = new frmPrincipal();
                     form.Show();
@@ -59,14 +59,6 @@ namespace pryLunaLopez_IEFI
             picVerContraseña.Image = mostrarContraseña
                 ? Properties.Resources.icons8_eye_15
                 : Properties.Resources.icons8_closed_eye_15;
-        }
-
-        private void linkLblRegistro_Click(object sender, EventArgs e)
-        {
-            frmSignIn signIn = new frmSignIn();
-
-            signIn.Show();
-            this.Hide();
         }
     }
 }

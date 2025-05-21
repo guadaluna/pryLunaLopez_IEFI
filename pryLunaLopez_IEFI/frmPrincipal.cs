@@ -95,5 +95,9 @@ namespace pryLunaLopez_IEFI
             ocultarSubMenu();
         }
 
+        private void frmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

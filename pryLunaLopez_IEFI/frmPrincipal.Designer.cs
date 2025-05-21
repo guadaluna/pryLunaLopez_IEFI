@@ -51,12 +51,12 @@
             this.panelFormulario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(220)))), ((int)(((byte)(214)))));
             this.panelFormulario.Location = new System.Drawing.Point(260, 10);
             this.panelFormulario.Name = "panelFormulario";
-            this.panelFormulario.Size = new System.Drawing.Size(1008, 722);
+            this.panelFormulario.Size = new System.Drawing.Size(992, 702);
             this.panelFormulario.TabIndex = 5;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(250, 746);
+            this.statusStrip1.Location = new System.Drawing.Point(250, 727);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
             this.statusStrip1.TabIndex = 4;
@@ -212,19 +212,22 @@
             this.panelMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenuLateral.Location = new System.Drawing.Point(0, 0);
             this.panelMenuLateral.Name = "panelMenuLateral";
-            this.panelMenuLateral.Size = new System.Drawing.Size(250, 768);
+            this.panelMenuLateral.Size = new System.Drawing.Size(250, 749);
             this.panelMenuLateral.TabIndex = 3;
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 768);
+            this.BackgroundImage = global::pryLunaLopez_IEFI.Properties.Resources.Capas_onduladas_y_círculos_azules;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1276, 749);
             this.Controls.Add(this.panelFormulario);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panelMenuLateral);
             this.Name = "frmPrincipal";
             this.Text = "frmPrincipal";
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.panelTareasSubMenu.ResumeLayout(false);
             this.panelAdminSubMenu.ResumeLayout(false);
             this.panelMenuLateral.ResumeLayout(false);

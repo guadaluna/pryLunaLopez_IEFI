@@ -37,8 +37,6 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.imgCandado = new System.Windows.Forms.PictureBox();
             this.imgUser = new System.Windows.Forms.PictureBox();
-            this.lblPregunta = new ReaLTaiizor.Controls.DungeonLabel();
-            this.linkLblRegistro = new ReaLTaiizor.Controls.FoxLinkLabel();
             this.btnLogIn = new ReaLTaiizor.Controls.Button();
             this.lblContraseña = new ReaLTaiizor.Controls.DungeonLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -60,14 +58,12 @@
             this.panelIniciarSesion.Controls.Add(this.txtUsuario);
             this.panelIniciarSesion.Controls.Add(this.imgCandado);
             this.panelIniciarSesion.Controls.Add(this.imgUser);
-            this.panelIniciarSesion.Controls.Add(this.lblPregunta);
-            this.panelIniciarSesion.Controls.Add(this.linkLblRegistro);
             this.panelIniciarSesion.Controls.Add(this.btnLogIn);
             this.panelIniciarSesion.Controls.Add(this.lblContraseña);
             this.panelIniciarSesion.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelIniciarSesion.Location = new System.Drawing.Point(238, 0);
+            this.panelIniciarSesion.Location = new System.Drawing.Point(237, 0);
             this.panelIniciarSesion.Name = "panelIniciarSesion";
-            this.panelIniciarSesion.Size = new System.Drawing.Size(442, 357);
+            this.panelIniciarSesion.Size = new System.Drawing.Size(442, 305);
             this.panelIniciarSesion.TabIndex = 4;
             // 
             // lblError
@@ -152,33 +148,6 @@
             this.imgUser.TabIndex = 13;
             this.imgUser.TabStop = false;
             // 
-            // lblPregunta
-            // 
-            this.lblPregunta.AutoSize = true;
-            this.lblPregunta.BackColor = System.Drawing.Color.Transparent;
-            this.lblPregunta.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPregunta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(77)))));
-            this.lblPregunta.Location = new System.Drawing.Point(171, 276);
-            this.lblPregunta.Name = "lblPregunta";
-            this.lblPregunta.Size = new System.Drawing.Size(118, 17);
-            this.lblPregunta.TabIndex = 11;
-            this.lblPregunta.Text = "¿No tienes cuenta?";
-            // 
-            // linkLblRegistro
-            // 
-            this.linkLblRegistro.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLblRegistro.DownColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(149)))), ((int)(((byte)(0)))));
-            this.linkLblRegistro.EnabledCalc = true;
-            this.linkLblRegistro.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.linkLblRegistro.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(149)))), ((int)(((byte)(221)))));
-            this.linkLblRegistro.Location = new System.Drawing.Point(195, 296);
-            this.linkLblRegistro.Name = "linkLblRegistro";
-            this.linkLblRegistro.OverColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(140)))), ((int)(((byte)(229)))));
-            this.linkLblRegistro.Size = new System.Drawing.Size(60, 19);
-            this.linkLblRegistro.TabIndex = 10;
-            this.linkLblRegistro.Text = "Registrate";
-            this.linkLblRegistro.Click += new ReaLTaiizor.Util.FoxBase.ButtonFoxBase.ClickEventHandler(this.linkLblRegistro_Click);
-            // 
             // btnLogIn
             // 
             this.btnLogIn.BackColor = System.Drawing.Color.Transparent;
@@ -239,7 +208,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::pryLunaLopez_IEFI.Properties.Resources.Ondas_terrosas_y_detalles_geométricos;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(680, 357);
+            this.ClientSize = new System.Drawing.Size(679, 305);
             this.Controls.Add(this.bigLabel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelIniciarSesion);
@@ -265,8 +234,6 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.PictureBox imgCandado;
         private System.Windows.Forms.PictureBox imgUser;
-        private ReaLTaiizor.Controls.DungeonLabel lblPregunta;
-        private ReaLTaiizor.Controls.FoxLinkLabel linkLblRegistro;
         private ReaLTaiizor.Controls.Button btnLogIn;
         private ReaLTaiizor.Controls.DungeonLabel lblContraseña;
         private System.Windows.Forms.PictureBox pictureBox1;

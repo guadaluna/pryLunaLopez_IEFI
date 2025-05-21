@@ -36,28 +36,6 @@ namespace pryLunaLopez_IEFI
         }
 
         //TABLA USUARIOS
-        //Crear cuenta
-        public void RegistrarUsuario()
-        {
-            try
-            {
-                ConectarBD();
-                string consulta = "INSERT INTO Usuarios (NombreUsuario, Contraseña) VALUES (@usuario, @contrasena)";
-                SqlCommand cmd = new SqlCommand(consulta, conexionBaseDatos);
-
-                cmd.Parameters.AddWithValue("@usuario", usuario);
-                cmd.Parameters.AddWithValue("@contrasena", contrasena);
-                cmd.ExecuteNonQuery();
-
-
-                MessageBox.Show("Registro exitoso");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-        }
-
         //Iniciar sesion
         public bool IniciarSesion()
         {
@@ -78,6 +56,28 @@ namespace pryLunaLopez_IEFI
             {
                 MessageBox.Show("Error al iniciar sesión: " + ex.Message);
                 return false;
+            }
+        }
+
+        //Agregar empleado
+        public void AgregarEmpleado()
+        {
+            try
+            {
+                ConectarBD();
+                string consulta = "INSERT INTO Usuarios (NombreUsuario, Contraseña) VALUES (@usuario, @contrasena)";
+                SqlCommand cmd = new SqlCommand(consulta, conexionBaseDatos);
+
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                cmd.ExecuteNonQuery();
+
+
+                MessageBox.Show("Registro exitoso");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
