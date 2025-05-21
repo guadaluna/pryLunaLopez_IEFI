@@ -59,12 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmInicio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmInicio.Designer.cs">
-      <DependentUpon>frmInicio.cs</DependentUpon>
-    </Compile>
+    <Compile Include="clsConexionBD.cs" />
     <Compile Include="frmLogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,9 +92,6 @@
     <Compile Include="ucGestionUsuarios.Designer.cs">
       <DependentUpon>ucGestionUsuarios.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmInicio.resx">
-      <DependentUpon>frmInicio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmLogIn.resx">
       <DependentUpon>frmLogIn.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +130,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\icons8-eye-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\18986361_6084855.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ondas terrosas y detalles geométricos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Capas onduladas y círculos azules.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

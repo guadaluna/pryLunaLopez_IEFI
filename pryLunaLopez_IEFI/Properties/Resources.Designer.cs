@@ -63,6 +63,26 @@ namespace pryLunaLopez_IEFI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _18986361_6084855 {
+            get {
+                object obj = ResourceManager.GetObject("18986361_6084855", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Capas_onduladas_y_círculos_azules {
+            get {
+                object obj = ResourceManager.GetObject("Capas onduladas y círculos azules", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_closed_eye_15 {
             get {
                 object obj = ResourceManager.GetObject("icons8-closed-eye-15", resourceCulture);
@@ -76,6 +96,16 @@ namespace pryLunaLopez_IEFI.Properties {
         internal static System.Drawing.Bitmap icons8_eye_15 {
             get {
                 object obj = ResourceManager.GetObject("icons8-eye-15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ondas_terrosas_y_detalles_geométricos {
+            get {
+                object obj = ResourceManager.GetObject("Ondas terrosas y detalles geométricos", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

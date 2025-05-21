@@ -16,20 +16,22 @@ namespace pryLunaLopez_IEFI
         {
             InitializeComponent();
         }
+        clsConexionBD conexionBD = new clsConexionBD();
 
         bool mostrarContraseña = false;
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             if (txtUsuario.Text == "" || txtContraseña.Text == "")
             {
-                MessageBox.Show("Por favor complete los campos");
+                mensajeError("Por favor complete los campos");
             }
             else
             {
-                //conexionBD.usuario = txtUsuario.Text;
-                //conexionBD.contrasena = txtContraseña.Text;
+                conexionBD.usuario = txtUsuario.Text;
+                conexionBD.contrasena = txtContraseña.Text;
 
-                //if (conexionBD.IniciarSesion())
+                if (conexionBD.IniciarSesion())
                 {
                     frmPrincipal form = new frmPrincipal();
                     form.Show();
@@ -37,9 +39,15 @@ namespace pryLunaLopez_IEFI
                 }
                 //else
                 {
-                    MessageBox.Show("Usuario o contraseña incorrectos");
+                    mensajeError("Usuario o contraseña incorrectos");
                 }
             }
+        }
+
+        private void mensajeError(String mensaje)
+        {
+            lblError.Text = "    " + mensaje;
+            lblError.Visible = true;
         }
 
         private void picVerContraseña_Click(object sender, EventArgs e)
@@ -51,6 +59,14 @@ namespace pryLunaLopez_IEFI
             picVerContraseña.Image = mostrarContraseña
                 ? Properties.Resources.icons8_eye_15
                 : Properties.Resources.icons8_closed_eye_15;
+        }
+
+        private void linkLblRegistro_Click(object sender, EventArgs e)
+        {
+            frmSignIn signIn = new frmSignIn();
+
+            signIn.Show();
+            this.Hide();
         }
     }
 }
