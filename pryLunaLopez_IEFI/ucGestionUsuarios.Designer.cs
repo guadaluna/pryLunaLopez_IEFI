@@ -34,11 +34,28 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUsuarios = new Sunny.UI.UIDataGridView();
+            this.grpUsuarios = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new ReaLTaiizor.Controls.AloneButton();
+            this.btnModificar = new ReaLTaiizor.Controls.AloneButton();
+            this.btnEliminar = new ReaLTaiizor.Controls.AloneButton();
+            this.txtContraseña = new ReaLTaiizor.Controls.DungeonTextBox();
+            this.txtNombre = new ReaLTaiizor.Controls.DungeonTextBox();
+            this.txtUsuario = new ReaLTaiizor.Controls.DungeonTextBox();
+            this.btnAgregar = new ReaLTaiizor.Controls.AloneButton();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.lblContraseña = new System.Windows.Forms.Label();
+            this.lblAdmin = new System.Windows.Forms.Label();
+            this.optSi = new Sunny.UI.UIRadioButton();
+            this.optNo = new Sunny.UI.UIRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
+            this.grpUsuarios.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUsuarios
             // 
+            this.dgvUsuarios.AllowUserToAddRows = false;
+            this.dgvUsuarios.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -63,8 +80,9 @@
             this.dgvUsuarios.EnableHeadersVisualStyles = false;
             this.dgvUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dgvUsuarios.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.dgvUsuarios.Location = new System.Drawing.Point(197, 79);
+            this.dgvUsuarios.Location = new System.Drawing.Point(214, 16);
             this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.RectColor = System.Drawing.Color.Pink;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
@@ -78,19 +96,207 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dgvUsuarios.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvUsuarios.SelectedIndex = -1;
-            this.dgvUsuarios.Size = new System.Drawing.Size(720, 486);
+            this.dgvUsuarios.Size = new System.Drawing.Size(756, 666);
             this.dgvUsuarios.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
+            // 
+            // grpUsuarios
+            // 
+            this.grpUsuarios.Controls.Add(this.optNo);
+            this.grpUsuarios.Controls.Add(this.optSi);
+            this.grpUsuarios.Controls.Add(this.btnLimpiar);
+            this.grpUsuarios.Controls.Add(this.btnModificar);
+            this.grpUsuarios.Controls.Add(this.btnEliminar);
+            this.grpUsuarios.Controls.Add(this.txtContraseña);
+            this.grpUsuarios.Controls.Add(this.txtNombre);
+            this.grpUsuarios.Controls.Add(this.txtUsuario);
+            this.grpUsuarios.Controls.Add(this.btnAgregar);
+            this.grpUsuarios.Controls.Add(this.lblNombre);
+            this.grpUsuarios.Controls.Add(this.lblUsuario);
+            this.grpUsuarios.Controls.Add(this.lblContraseña);
+            this.grpUsuarios.Controls.Add(this.lblAdmin);
+            this.grpUsuarios.Location = new System.Drawing.Point(28, 16);
+            this.grpUsuarios.Name = "grpUsuarios";
+            this.grpUsuarios.Size = new System.Drawing.Size(180, 445);
+            this.grpUsuarios.TabIndex = 25;
+            this.grpUsuarios.TabStop = false;
+            this.grpUsuarios.Text = "Producto";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimpiar.EnabledCalc = true;
+            this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnLimpiar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.btnLimpiar.Location = new System.Drawing.Point(20, 364);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(128, 29);
+            this.btnLimpiar.TabIndex = 29;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.Click += new ReaLTaiizor.Controls.AloneButton.ClickEventHandler(this.btnLimpiar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnModificar.EnabledCalc = true;
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.btnModificar.Location = new System.Drawing.Point(20, 329);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(128, 29);
+            this.btnModificar.TabIndex = 28;
+            this.btnModificar.Text = "Editar";
+            this.btnModificar.Click += new ReaLTaiizor.Controls.AloneButton.ClickEventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEliminar.EnabledCalc = true;
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.btnEliminar.Location = new System.Drawing.Point(20, 294);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(128, 29);
+            this.btnEliminar.TabIndex = 26;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Click += new ReaLTaiizor.Controls.AloneButton.ClickEventHandler(this.btnEliminar_Click);
+            // 
+            // txtContraseña
+            // 
+            this.txtContraseña.BackColor = System.Drawing.Color.Transparent;
+            this.txtContraseña.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtContraseña.EdgeColor = System.Drawing.Color.White;
+            this.txtContraseña.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtContraseña.ForeColor = System.Drawing.Color.DimGray;
+            this.txtContraseña.Location = new System.Drawing.Point(20, 148);
+            this.txtContraseña.MaxLength = 32767;
+            this.txtContraseña.Multiline = false;
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.ReadOnly = false;
+            this.txtContraseña.Size = new System.Drawing.Size(128, 28);
+            this.txtContraseña.TabIndex = 23;
+            this.txtContraseña.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtContraseña.UseSystemPasswordChar = false;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.BackColor = System.Drawing.Color.Transparent;
+            this.txtNombre.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtNombre.EdgeColor = System.Drawing.Color.White;
+            this.txtNombre.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtNombre.ForeColor = System.Drawing.Color.DimGray;
+            this.txtNombre.Location = new System.Drawing.Point(20, 43);
+            this.txtNombre.MaxLength = 32767;
+            this.txtNombre.Multiline = false;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ReadOnly = false;
+            this.txtNombre.Size = new System.Drawing.Size(128, 28);
+            this.txtNombre.TabIndex = 22;
+            this.txtNombre.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtNombre.UseSystemPasswordChar = false;
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.BackColor = System.Drawing.Color.Transparent;
+            this.txtUsuario.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.txtUsuario.EdgeColor = System.Drawing.Color.White;
+            this.txtUsuario.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtUsuario.ForeColor = System.Drawing.Color.DimGray;
+            this.txtUsuario.Location = new System.Drawing.Point(20, 95);
+            this.txtUsuario.MaxLength = 32767;
+            this.txtUsuario.Multiline = false;
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.ReadOnly = false;
+            this.txtUsuario.Size = new System.Drawing.Size(128, 28);
+            this.txtUsuario.TabIndex = 24;
+            this.txtUsuario.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtUsuario.UseSystemPasswordChar = false;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregar.EnabledCalc = true;
+            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnAgregar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.btnAgregar.Location = new System.Drawing.Point(20, 259);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(128, 29);
+            this.btnAgregar.TabIndex = 22;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Click += new ReaLTaiizor.Controls.AloneButton.ClickEventHandler(this.btnAgregar_Click);
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(17, 27);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.TabIndex = 5;
+            this.lblNombre.Text = "Nombre";
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(17, 79);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(43, 13);
+            this.lblUsuario.TabIndex = 6;
+            this.lblUsuario.Text = "Usuario";
+            // 
+            // lblContraseña
+            // 
+            this.lblContraseña.AutoSize = true;
+            this.lblContraseña.Location = new System.Drawing.Point(17, 132);
+            this.lblContraseña.Name = "lblContraseña";
+            this.lblContraseña.Size = new System.Drawing.Size(61, 13);
+            this.lblContraseña.TabIndex = 7;
+            this.lblContraseña.Text = "Contraseña";
+            // 
+            // lblAdmin
+            // 
+            this.lblAdmin.AutoSize = true;
+            this.lblAdmin.Location = new System.Drawing.Point(17, 186);
+            this.lblAdmin.Name = "lblAdmin";
+            this.lblAdmin.Size = new System.Drawing.Size(96, 13);
+            this.lblAdmin.TabIndex = 8;
+            this.lblAdmin.Text = "¿Es administrador?";
+            // 
+            // optSi
+            // 
+            this.optSi.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.optSi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optSi.Location = new System.Drawing.Point(20, 202);
+            this.optSi.MinimumSize = new System.Drawing.Size(1, 1);
+            this.optSi.Name = "optSi";
+            this.optSi.Size = new System.Drawing.Size(124, 27);
+            this.optSi.TabIndex = 31;
+            this.optSi.Text = "Si";
+            // 
+            // optNo
+            // 
+            this.optNo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.optNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.optNo.Location = new System.Drawing.Point(20, 226);
+            this.optNo.MinimumSize = new System.Drawing.Size(1, 1);
+            this.optNo.Name = "optNo";
+            this.optNo.Size = new System.Drawing.Size(124, 27);
+            this.optNo.TabIndex = 32;
+            this.optNo.Text = "No";
             // 
             // ucGestionUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(220)))), ((int)(((byte)(214)))));
+            this.Controls.Add(this.grpUsuarios);
             this.Controls.Add(this.dgvUsuarios);
             this.Name = "ucGestionUsuarios";
-            this.Size = new System.Drawing.Size(1008, 722);
+            this.Size = new System.Drawing.Size(992, 702);
+            this.Load += new System.EventHandler(this.ucGestionUsuarios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
+            this.grpUsuarios.ResumeLayout(false);
+            this.grpUsuarios.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -98,5 +304,19 @@
         #endregion
 
         private Sunny.UI.UIDataGridView dgvUsuarios;
+        private System.Windows.Forms.GroupBox grpUsuarios;
+        private ReaLTaiizor.Controls.AloneButton btnLimpiar;
+        private ReaLTaiizor.Controls.AloneButton btnModificar;
+        private ReaLTaiizor.Controls.AloneButton btnEliminar;
+        private ReaLTaiizor.Controls.DungeonTextBox txtContraseña;
+        private ReaLTaiizor.Controls.DungeonTextBox txtNombre;
+        private ReaLTaiizor.Controls.DungeonTextBox txtUsuario;
+        private ReaLTaiizor.Controls.AloneButton btnAgregar;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.Label lblContraseña;
+        private System.Windows.Forms.Label lblAdmin;
+        private Sunny.UI.UIRadioButton optNo;
+        private Sunny.UI.UIRadioButton optSi;
     }
 }

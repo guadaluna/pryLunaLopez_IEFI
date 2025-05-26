@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelFormulario = new System.Windows.Forms.Panel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnTareas = new System.Windows.Forms.Button();
             this.panelTareasSubMenu = new System.Windows.Forms.Panel();
@@ -41,6 +42,11 @@
             this.btnAuditoria = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.panelMenuLateral = new System.Windows.Forms.Panel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.stripStatusLblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stripStatusLblFecha = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stripStatusLblTiempo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip.SuspendLayout();
             this.panelTareasSubMenu.SuspendLayout();
             this.panelAdminSubMenu.SuspendLayout();
             this.panelMenuLateral.SuspendLayout();
@@ -54,13 +60,17 @@
             this.panelFormulario.Size = new System.Drawing.Size(992, 702);
             this.panelFormulario.TabIndex = 5;
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(250, 727);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stripStatusLblUsuario,
+            this.stripStatusLblFecha,
+            this.stripStatusLblTiempo});
+            this.statusStrip.Location = new System.Drawing.Point(250, 727);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1026, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
             // 
             // panel1
             // 
@@ -184,6 +194,7 @@
             this.btnAuditoria.Text = "Auditoria";
             this.btnAuditoria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAuditoria.UseVisualStyleBackColor = true;
+            this.btnAuditoria.Click += new System.EventHandler(this.btnAuditoria_Click);
             // 
             // btnUsuarios
             // 
@@ -199,6 +210,7 @@
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUsuarios.UseVisualStyleBackColor = true;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // panelMenuLateral
             // 
@@ -215,6 +227,25 @@
             this.panelMenuLateral.Size = new System.Drawing.Size(250, 749);
             this.panelMenuLateral.TabIndex = 3;
             // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // stripStatusLblUsuario
+            // 
+            this.stripStatusLblUsuario.Name = "stripStatusLblUsuario";
+            this.stripStatusLblUsuario.Size = new System.Drawing.Size(0, 17);
+            // 
+            // stripStatusLblFecha
+            // 
+            this.stripStatusLblFecha.Name = "stripStatusLblFecha";
+            this.stripStatusLblFecha.Size = new System.Drawing.Size(0, 17);
+            // 
+            // stripStatusLblTiempo
+            // 
+            this.stripStatusLblTiempo.Name = "stripStatusLblTiempo";
+            this.stripStatusLblTiempo.Size = new System.Drawing.Size(0, 17);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -223,11 +254,14 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1276, 749);
             this.Controls.Add(this.panelFormulario);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.panelMenuLateral);
             this.Name = "frmPrincipal";
             this.Text = "frmPrincipal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.frmPrincipal_Load);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.panelTareasSubMenu.ResumeLayout(false);
             this.panelAdminSubMenu.ResumeLayout(false);
             this.panelMenuLateral.ResumeLayout(false);
@@ -239,7 +273,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelFormulario;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnTareas;
         private System.Windows.Forms.Panel panelTareasSubMenu;
@@ -251,5 +285,9 @@
         private System.Windows.Forms.Button btnAuditoria;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Panel panelMenuLateral;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripStatusLabel stripStatusLblUsuario;
+        private System.Windows.Forms.ToolStripStatusLabel stripStatusLblFecha;
+        private System.Windows.Forms.ToolStripStatusLabel stripStatusLblTiempo;
     }
 }

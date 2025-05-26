@@ -19,7 +19,8 @@ namespace pryLunaLopez_IEFI
         clsConexionBD conexionBD = new clsConexionBD();
 
         bool mostrarContraseña = false;
-
+        public static string UsuarioSesion = "";
+        public static bool EsAdminSesion = false;
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             if (txtUsuario.Text == "" || txtContraseña.Text == "")
@@ -31,13 +32,20 @@ namespace pryLunaLopez_IEFI
                 conexionBD.usuario = txtUsuario.Text;
                 conexionBD.contrasena = txtContraseña.Text;
 
-                //if (conexionBD.IniciarSesion())
+                if (conexionBD.IniciarSesion())
                 {
-                    frmPrincipal form = new frmPrincipal();
+                    UsuarioSesion = txtUsuario.Text;
+                    EsAdminSesion = conexionBD.EsUsuarioAdmin(txtUsuario.Text);
+
+                    conexionBD.horaInicio = DateTime.Now;
+
+                    int idAuditoria = conexionBD.InsertarAuditoria();
+
+                    frmPrincipal form = new frmPrincipal(txtUsuario.Text, conexionBD.horaInicio, idAuditoria);
                     form.Show();
                     this.Hide();
                 }
-                //else
+                else
                 {
                     mensajeError("Usuario o contraseña incorrectos");
                 }

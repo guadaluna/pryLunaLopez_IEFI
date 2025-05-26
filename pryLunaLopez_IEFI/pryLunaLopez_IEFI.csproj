@@ -102,6 +102,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucAuditorias.resx">
+      <DependentUpon>ucAuditorias.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucGestionUsuarios.resx">
       <DependentUpon>ucGestionUsuarios.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,5 +16,145 @@ namespace pryLunaLopez_IEFI
         {
             InitializeComponent();
         }
+        clsConexionBD conexionBD = new clsConexionBD();
+        private int idSeleccionado = -1;
+        string UsuarioSesion;
+
+        private void ucGestionUsuarios_Load(object sender, EventArgs e)
+        {
+            conexionBD.MostrarUsuarios(dgvUsuarios);
+            dgvUsuarios.AllowUserToAddRows = false;
+
+
+
+        }
+
+
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            if (txtNombre.Text == "" || txtUsuario.Text == "" || txtContraseña.Text == "" || (!optSi.Checked && !optNo.Checked))
+            {
+                MessageBox.Show("Por favor complete todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (conexionBD.usuarioExistente(txtUsuario.Text))
+            {
+                MessageBox.Show("El nombre de usuario ya existe. Elija otro.", "Usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                conexionBD.nombre = txtNombre.Text;
+                conexionBD.usuario = txtUsuario.Text;
+                conexionBD.contrasena = txtContraseña.Text;
+                conexionBD.esAdmin = optSi.Checked;
+
+                conexionBD.agregarUsuario();
+                cargarUsuarios();
+            }
+        }
+
+        private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dgvUsuarios.Rows[e.RowIndex];
+                idSeleccionado = Convert.ToInt32(fila.Cells["Id"].Value);
+                txtNombre.Text = fila.Cells["Nombre"].Value.ToString();
+                txtUsuario.Text = fila.Cells["Usuario"].Value.ToString();
+                txtContraseña.Text = fila.Cells["Contraseña"].Value.ToString();
+                bool esAdmin = Convert.ToBoolean(fila.Cells["EsAdmin"].Value);
+                optSi.Checked = esAdmin;
+                optNo.Checked = !esAdmin;
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.CurrentRow.Index == -1)
+            {
+                MessageBox.Show("Seleccione un usuario para modificar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (txtNombre.Text == "" || txtUsuario.Text == "" || txtContraseña.Text == "" || (!optSi.Checked && !optNo.Checked))
+            {
+                MessageBox.Show("Complete todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvUsuarios.CurrentRow.Cells["Id"].Value);
+
+            if (conexionBD.usuarioExistente(txtUsuario.Text, id))
+            {
+                MessageBox.Show("Ya existe otro usuario con ese nombre", "Usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            conexionBD.nombre = txtNombre.Text;
+            conexionBD.usuario = txtUsuario.Text;
+            conexionBD.contrasena = txtContraseña.Text;
+            conexionBD.esAdmin = optSi.Checked;
+
+            int filaSeleccionada = dgvUsuarios.CurrentRow.Index;
+
+            conexionBD.actualizarUsuario(id);
+
+            cargarUsuarios(limpiarCampos: false);
+
+            if (dgvUsuarios.Rows.Count > filaSeleccionada)
+            {
+                dgvUsuarios.Rows[filaSeleccionada].Selected = true;
+            }
+
+            MessageBox.Show("Usuario modificado correctamente", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cargarUsuarios(bool limpiarCampos = true)
+        {
+            conexionBD.MostrarUsuarios(dgvUsuarios);
+            dgvUsuarios.ClearSelection();
+
+            if (limpiarCampos)
+            {
+                idSeleccionado = -1;
+                txtNombre.Text = "";
+                txtUsuario.Text = "";
+                txtContraseña.Text = "";
+                optSi.Checked = false;
+                optNo.Checked = false;
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvUsuarios.CurrentRow == null || dgvUsuarios.CurrentRow.Index == -1)
+            {
+                MessageBox.Show("Seleccione un usuario para eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int id = Convert.ToInt32(dgvUsuarios.CurrentRow.Cells["Id"].Value);
+            string usuarioSeleccionado = dgvUsuarios.CurrentRow.Cells["Usuario"].Value.ToString();
+
+            if (usuarioSeleccionado == UsuarioSesion)
+            {
+                MessageBox.Show("No puedes eliminar al usuario con el que iniciaste sesión", "Acción no permitida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult confirmacion = MessageBox.Show("¿Estás seguro de eliminar este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmacion == DialogResult.Yes)
+            {
+                conexionBD.eliminarUsuario(id);
+                cargarUsuarios();
+                MessageBox.Show("Usuario eliminado correctamente", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtNombre.Text = "";
+            txtUsuario.Text = "";
+            txtContraseña.Text = "";
+        }
     }
 }

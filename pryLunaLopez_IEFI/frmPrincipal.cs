@@ -15,8 +15,57 @@ namespace pryLunaLopez_IEFI
         public frmPrincipal()
         {
             InitializeComponent();
-            personalizar();
+            InicializarControles();
         }
+
+        public frmPrincipal(string usuario, DateTime horaInicio, int idAuditoria)
+        {
+            InitializeComponent();
+            this.usuarioActual = usuario;
+            this.horaInicioSesion = horaInicio;
+            this.idAuditoriaActual = idAuditoria;
+
+            conexion.usuario = usuario;
+            conexion.horaInicio = horaInicio;
+            conexion.idAuditoria = idAuditoria;
+
+            InicializarControles();
+
+            tiempoTrabajado = TimeSpan.Zero;
+            timer.Interval = 1000;
+            timer.Start();
+        }
+
+        private void InicializarControles()
+        {
+            personalizar();
+
+            ucAuditorias.Dock = DockStyle.Fill;
+            ucGestionUsuarios.Dock = DockStyle.Fill;
+
+            panelFormulario.Controls.Add(ucAuditorias);
+            panelFormulario.Controls.Add(ucGestionUsuarios);
+
+            ucAuditorias.Visible = false;
+            ucGestionUsuarios.Visible = false;
+        }
+
+
+        private int idAuditoriaActual;
+        private DateTime horaInicioSesion;
+        private TimeSpan tiempoTrabajado;
+
+        private string usuarioActual;
+
+        public string UsuarioSesion;
+        public bool EsAdminSesion;
+
+
+        clsConexionBD conexion = new clsConexionBD();
+
+        ucAuditorias ucAuditorias = new ucAuditorias();
+        ucGestionUsuarios ucGestionUsuarios = new ucGestionUsuarios();
+
 
         private void personalizar()
         {
@@ -97,7 +146,49 @@ namespace pryLunaLopez_IEFI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
+            horaInicioSesion = DateTime.Now;
 
+            stripStatusLblUsuario.Text = "Usuario: " + usuarioActual;
+            stripStatusLblFecha.Text = "Fecha: " + horaInicioSesion.ToString("dd/MM/yyyy");
+            stripStatusLblTiempo.Text = "Tiempo: 00:00:00";
+
+            timer.Interval = 1000;
+            timer.Start();
+        }
+
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            ucAuditorias.Visible = true;
+            ucAuditorias.BringToFront();
+            ucGestionUsuarios.Visible = false;
+        }
+
+
+        private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conexion.horaFin = DateTime.Now;
+            conexion.tiempoTrabajado = conexion.horaFin - conexion.horaInicio;
+            conexion.RegistrarSesion();
+
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            tiempoTrabajado = DateTime.Now - horaInicioSesion;
+            stripStatusLblTiempo.Text = tiempoTrabajado.ToString(@"hh\:mm\:ss");
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            if (!frmLogIn.EsAdminSesion)
+            {
+                MessageBox.Show("No tienes permisos para acceder a la gestión de usuarios.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ucGestionUsuarios.Visible = true;
+            ucGestionUsuarios.BringToFront();
+            ucAuditorias.Visible = false;
         }
     }
 }
