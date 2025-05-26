@@ -104,8 +104,6 @@ namespace pryLunaLopez_IEFI
             {
                 dgvUsuarios.Rows[filaSeleccionada].Selected = true;
             }
-
-            MessageBox.Show("Usuario modificado correctamente", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cargarUsuarios(bool limpiarCampos = true)
@@ -146,7 +144,6 @@ namespace pryLunaLopez_IEFI
             {
                 conexionBD.eliminarUsuario(id);
                 cargarUsuarios();
-                MessageBox.Show("Usuario eliminado correctamente", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
