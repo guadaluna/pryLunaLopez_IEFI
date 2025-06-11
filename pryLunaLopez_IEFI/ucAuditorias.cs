@@ -17,11 +17,11 @@ namespace pryLunaLopez_IEFI
             InitializeComponent();
         }
 
-        clsConexionBD conexion = new clsConexionBD();
+        clsAuditoria auditoria = new clsAuditoria();
 
         private void ucAuditorias_Load(object sender, EventArgs e)
         {
-            conexion.MostrarAuditoria(dgvAuditoria);
+            auditoria.MostrarAuditoria(dgvAuditoria);
 
             dgvAuditoria.Columns["Usuario"].HeaderText = "Usuario";
             dgvAuditoria.Columns["Fecha"].HeaderText = "Fecha";

@@ -16,7 +16,9 @@ namespace pryLunaLopez_IEFI
         {
             InitializeComponent();
         }
-        clsConexionBD conexionBD = new clsConexionBD();
+
+        clsLogin login = new clsLogin();
+        clsAuditoria auditoria = new clsAuditoria();
 
         bool mostrarContraseña = false;
         public static string UsuarioSesion = "";
@@ -29,19 +31,21 @@ namespace pryLunaLopez_IEFI
             }
             else
             {
-                conexionBD.usuario = txtUsuario.Text;
-                conexionBD.contrasena = txtContraseña.Text;
+                login.usuario = txtUsuario.Text;
+                login.contrasena = txtContraseña.Text;
 
-                if (conexionBD.IniciarSesion())
+                if (login.IniciarSesion())
                 {
                     UsuarioSesion = txtUsuario.Text;
-                    EsAdminSesion = conexionBD.EsUsuarioAdmin(txtUsuario.Text);
+                    EsAdminSesion = login.EsUsuarioAdmin(txtUsuario.Text);
 
-                    conexionBD.horaInicio = DateTime.Now;
+                    login.horaInicio = DateTime.Now;
+                    auditoria.usuario = txtUsuario.Text;
+                    auditoria.horaInicio = login.horaInicio;
 
-                    int idAuditoria = conexionBD.InsertarAuditoria();
+                    int idAuditoria = auditoria.InsertarAuditoria();
 
-                    frmPrincipal form = new frmPrincipal(txtUsuario.Text, conexionBD.horaInicio, idAuditoria);
+                    frmPrincipal form = new frmPrincipal(txtUsuario.Text, login.horaInicio, idAuditoria);
                     form.Show();
                     this.Hide();
                 }

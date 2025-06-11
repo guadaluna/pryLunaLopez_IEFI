@@ -16,39 +16,42 @@ namespace pryLunaLopez_IEFI
         {
             InitializeComponent();
         }
-        clsConexionBD conexionBD = new clsConexionBD();
+
+        clsUsuarios usuarios = new clsUsuarios();
+        clsLogin usuariosLogin = new clsLogin();
+
         private int idSeleccionado = -1;
-        string UsuarioSesion;
+        public string UsuarioSesion;
 
         private void ucGestionUsuarios_Load(object sender, EventArgs e)
         {
-            conexionBD.MostrarUsuarios(dgvUsuarios);
+            usuarios.MostrarUsuarios(dgvUsuarios);
             dgvUsuarios.AllowUserToAddRows = false;
-
-
-
         }
 
 
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text == "" || txtUsuario.Text == "" || txtContraseña.Text == "" || (!optSi.Checked && !optNo.Checked))
+            if (txtNombre.Text == "" || txtUsuario.Text == "" || txtContraseña.Text == "" || txtTelefono.Text == "" || txtDNI.Text == "" || txtMail.Text == "" || (!optSi.Checked && !optNo.Checked))
             {
                 MessageBox.Show("Por favor complete todos los datos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (conexionBD.usuarioExistente(txtUsuario.Text))
+            else if (usuariosLogin.usuarioExistente(txtUsuario.Text))
             {
                 MessageBox.Show("El nombre de usuario ya existe. Elija otro.", "Usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                conexionBD.nombre = txtNombre.Text;
-                conexionBD.usuario = txtUsuario.Text;
-                conexionBD.contrasena = txtContraseña.Text;
-                conexionBD.esAdmin = optSi.Checked;
+                usuarios.nombre = txtNombre.Text;
+                usuarios.usuario = txtUsuario.Text;
+                usuarios.contrasena = txtContraseña.Text;
+                usuarios.esAdmin = optSi.Checked;
+                usuarios.telefono = txtTelefono.Text;
+                usuarios.dni = txtDNI.Text;
+                usuarios.mail = txtMail.Text;
 
-                conexionBD.agregarUsuario();
+                usuarios.agregarUsuario();
                 cargarUsuarios();
             }
         }
@@ -63,6 +66,9 @@ namespace pryLunaLopez_IEFI
                 txtUsuario.Text = fila.Cells["Usuario"].Value.ToString();
                 txtContraseña.Text = fila.Cells["Contraseña"].Value.ToString();
                 bool esAdmin = Convert.ToBoolean(fila.Cells["EsAdmin"].Value);
+                txtTelefono.Text = fila.Cells["Telefono"].Value.ToString();
+                txtDNI.Text = fila.Cells["DNI"].Value.ToString();
+                txtMail.Text = fila.Cells["Mail"].Value.ToString();
                 optSi.Checked = esAdmin;
                 optNo.Checked = !esAdmin;
             }
@@ -84,19 +90,22 @@ namespace pryLunaLopez_IEFI
 
             int id = Convert.ToInt32(dgvUsuarios.CurrentRow.Cells["Id"].Value);
 
-            if (conexionBD.usuarioExistente(txtUsuario.Text, id))
+            if (usuariosLogin.usuarioExistente(txtUsuario.Text, id))
             {
                 MessageBox.Show("Ya existe otro usuario con ese nombre", "Usuario duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            conexionBD.nombre = txtNombre.Text;
-            conexionBD.usuario = txtUsuario.Text;
-            conexionBD.contrasena = txtContraseña.Text;
-            conexionBD.esAdmin = optSi.Checked;
+            usuarios.nombre = txtNombre.Text;
+            usuarios.usuario = txtUsuario.Text;
+            usuarios.contrasena = txtContraseña.Text;
+            usuarios.esAdmin = optSi.Checked;
+            usuarios.telefono = txtTelefono.Text;
+            usuarios.dni = txtDNI.Text;
+            usuarios.mail = txtMail.Text;
 
             int filaSeleccionada = dgvUsuarios.CurrentRow.Index;
 
-            conexionBD.actualizarUsuario(id);
+            usuarios.actualizarUsuario(id);
 
             cargarUsuarios(limpiarCampos: false);
 
@@ -105,12 +114,11 @@ namespace pryLunaLopez_IEFI
                 dgvUsuarios.Rows[filaSeleccionada].Selected = true;
             }
 
-            MessageBox.Show("Usuario modificado correctamente", "Modificar", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cargarUsuarios(bool limpiarCampos = true)
         {
-            conexionBD.MostrarUsuarios(dgvUsuarios);
+            usuarios.MostrarUsuarios(dgvUsuarios);
             dgvUsuarios.ClearSelection();
 
             if (limpiarCampos)
@@ -144,9 +152,8 @@ namespace pryLunaLopez_IEFI
             DialogResult confirmacion = MessageBox.Show("¿Estás seguro de eliminar este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirmacion == DialogResult.Yes)
             {
-                conexionBD.eliminarUsuario(id);
+                usuarios.eliminarUsuario(id);
                 cargarUsuarios();
-                MessageBox.Show("Usuario eliminado correctamente", "Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

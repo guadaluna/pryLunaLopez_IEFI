@@ -212,6 +212,7 @@
             this.Controls.Add(this.bigLabel1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelIniciarSesion);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLogIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar sesión";

@@ -12,6 +12,22 @@ namespace pryLunaLopez_IEFI
 {
     public partial class frmPrincipal : Form
     {
+
+        #region Variables
+        private int idAuditoriaActual;
+        private DateTime horaInicioSesion;
+        private TimeSpan tiempoTrabajado;
+        private string usuarioActual;
+
+        clsAuditoria auditoria = new clsAuditoria();
+
+        ucAuditorias ucAuditorias = new ucAuditorias();
+        ucGestionUsuarios ucGestionUsuarios = new ucGestionUsuarios();
+        ucTareas ucTareas = new ucTareas();
+        ucHistorial ucHistorial = new ucHistorial();
+        #endregion
+
+
         public frmPrincipal()
         {
             InitializeComponent();
@@ -21,51 +37,68 @@ namespace pryLunaLopez_IEFI
         public frmPrincipal(string usuario, DateTime horaInicio, int idAuditoria)
         {
             InitializeComponent();
+
             this.usuarioActual = usuario;
             this.horaInicioSesion = horaInicio;
             this.idAuditoriaActual = idAuditoria;
 
-            conexion.usuario = usuario;
-            conexion.horaInicio = horaInicio;
-            conexion.idAuditoria = idAuditoria;
+            auditoria.usuario = usuario;
+            auditoria.horaInicio = horaInicio;
+            auditoria.idAuditoria = idAuditoria;
 
             InicializarControles();
-
-            tiempoTrabajado = TimeSpan.Zero;
-            timer.Interval = 1000;
-            timer.Start();
         }
 
         private void InicializarControles()
         {
-            personalizar();
+            OcultarSubMenus();
 
-            ucAuditorias.Dock = DockStyle.Fill;
-            ucGestionUsuarios.Dock = DockStyle.Fill;
+            List<UserControl> controles = new List<UserControl> { ucAuditorias, ucGestionUsuarios, ucTareas, ucHistorial };
 
-            panelFormulario.Controls.Add(ucAuditorias);
-            panelFormulario.Controls.Add(ucGestionUsuarios);
-
-            ucAuditorias.Visible = false;
-            ucGestionUsuarios.Visible = false;
+            foreach (var ctrl in controles)
+            {
+                ctrl.Dock = DockStyle.Fill;
+                ctrl.Visible = false;
+                panelFormulario.Controls.Add(ctrl);
+            }
         }
 
+        private void OcultarSubMenus()
+        {
+            panelTareasSubMenu.Visible = false;
+            panelAdminSubMenu.Visible = false;
+        }
 
-        private int idAuditoriaActual;
-        private DateTime horaInicioSesion;
-        private TimeSpan tiempoTrabajado;
+        private void MostrarSubMenu(Panel subMenu)
+        {
+            if (!subMenu.Visible)
+            {
+                OcultarSubMenus();
+                subMenu.Visible = true;
+            }
+            else
+            {
+                subMenu.Visible = false;
+            }
+        }
 
-        private string usuarioActual;
+        private void MostrarControl(UserControl control)
+        {
+            ucAuditorias.Visible = false;
+            ucGestionUsuarios.Visible = false;
+            ucTareas.Visible = false;
+            ucHistorial.Visible = false;
 
-        public string UsuarioSesion;
-        public bool EsAdminSesion;
+            control.Visible = true;
+            control.BringToFront();
+        }
 
-
-        clsConexionBD conexion = new clsConexionBD();
-
-        ucAuditorias ucAuditorias = new ucAuditorias();
-        ucGestionUsuarios ucGestionUsuarios = new ucGestionUsuarios();
-
+        private void RegistrarCierreSesion()
+        {
+            auditoria.horaFin = DateTime.Now;
+            auditoria.tiempoTrabajado = auditoria.horaFin - auditoria.horaInicio;
+            auditoria.RegistrarSesion();
+        }
 
         private void personalizar()
         {
@@ -101,53 +134,18 @@ namespace pryLunaLopez_IEFI
 
         private void btnTareas_Click(object sender, EventArgs e)
         {
-            mostrarSubMenu(panelTareasSubMenu);
+            MostrarSubMenu(panelTareasSubMenu);
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //..
-            //..
-            ocultarSubMenu();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //..
-            //..
-            ocultarSubMenu();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //..
-            //..
-            ocultarSubMenu();
-        }
-
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             mostrarSubMenu(panelAdminSubMenu);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //..
-            //..
-            ocultarSubMenu();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //..
-            //..
-            ocultarSubMenu();
         }
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             horaInicioSesion = DateTime.Now;
 
+            lblBienvenido.Text = $"Bienvenido {usuarioActual}";
             stripStatusLblUsuario.Text = "Usuario: " + usuarioActual;
             stripStatusLblFecha.Text = "Fecha: " + horaInicioSesion.ToString("dd/MM/yyyy");
             stripStatusLblTiempo.Text = "Tiempo: 00:00:00";
@@ -158,18 +156,13 @@ namespace pryLunaLopez_IEFI
 
         private void btnAuditoria_Click(object sender, EventArgs e)
         {
-            ucAuditorias.Visible = true;
-            ucAuditorias.BringToFront();
-            ucGestionUsuarios.Visible = false;
+            MostrarControl(ucAuditorias);
         }
 
 
         private void frmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            conexion.horaFin = DateTime.Now;
-            conexion.tiempoTrabajado = conexion.horaFin - conexion.horaInicio;
-            conexion.RegistrarSesion();
-
+            RegistrarCierreSesion();
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -185,10 +178,34 @@ namespace pryLunaLopez_IEFI
                 MessageBox.Show("No tienes permisos para acceder a la gestión de usuarios.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            MostrarControl(ucGestionUsuarios);
+        }
 
-            ucGestionUsuarios.Visible = true;
-            ucGestionUsuarios.BringToFront();
-            ucAuditorias.Visible = false;
+        private void btnRegistrarTarea_Click(object sender, EventArgs e)
+        {
+            MostrarControl(ucTareas);
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            if (!frmLogIn.EsAdminSesion)
+            {
+                MessageBox.Show("No tienes permisos para acceder al historial.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            MostrarControl(ucHistorial);
+        }
+    
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Desea cerrar sesión?", "Mensaje de confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                RegistrarCierreSesion();
+                frmLogIn logIn = new frmLogIn();
+                logIn.Show();
+                this.Hide();
+            }
         }
     }
 }
