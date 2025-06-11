@@ -123,7 +123,6 @@ namespace pryLunaLopez_IEFI
             }
         }
 
-        // Agrega un nuevo lugar a la tabla OpcionesLugares
         public void AgregarLugar(string nombre)
         {
             try
@@ -144,7 +143,6 @@ namespace pryLunaLopez_IEFI
             }
         }
 
-        // Elimina una tarea por su nombre
         public void EliminarTarea(string nombre)
         {
             try
@@ -165,7 +163,6 @@ namespace pryLunaLopez_IEFI
             }
         }
 
-        // Elimina un lugar por su nombre
         public void EliminarLugar(string nombre)
         {
             try
@@ -186,7 +183,6 @@ namespace pryLunaLopez_IEFI
             }
         }
 
-        // Edita el nombre de una tarea (cambia el nombre viejo por uno nuevo)
         public void EditarTarea(string nombreViejo, string nombreNuevo)
         {
             try
@@ -208,7 +204,6 @@ namespace pryLunaLopez_IEFI
             }
         }
 
-        // Edita el nombre de un lugar (cambia el nombre viejo por uno nuevo)
         public void EditarLugar(string nombreViejo, string nombreNuevo)
         {
             try
